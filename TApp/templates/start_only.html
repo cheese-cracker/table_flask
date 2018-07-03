@@ -1,0 +1,45 @@
+<html>
+    <head>
+    <style>
+body {
+	background-color: #151515;
+	color: #eee;
+	font-family: 'Share Tech Mono', monospace;
+	user-select: none;
+}
+
+.info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	p { margin: 10px; }
+}
+
+.button {
+	background-color: #111;
+	border: solid 1px #888;
+	padding: 8px 25px;
+	font-size: 26px;
+	letter-spacing: 2px;
+	cursor: pointer;
+}
+.start {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+    </style>
+    </head>
+    <body>
+    <div class="info">
+        <p>Paste your .json file in TApp by replacing the existing upload.json. Change the FIELDS and file_name in jsonopener.py!</p>
+    </div>
+    <form action="" method="POST">
+    <button class="button start">
+    TABULATE MY DATA
+    </button>
+    </form>
+    </body>
+    </html>
