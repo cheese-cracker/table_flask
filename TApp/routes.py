@@ -1,6 +1,6 @@
 from TApp import appv
 from flask import render_template, request, redirect
-from TApp.jsonopener import get_json_file, FIELDS
+from TApp.jsonopener import get_json_file, FIELDS, FILE
 
 
 @appv.route('/', methods=["GET", "POST"])
@@ -8,10 +8,12 @@ from TApp.jsonopener import get_json_file, FIELDS
 def start_page():
     if request.method == "POST":
         return redirect('/table')
-    return render_template('start_only.html')
+    return render_template('start_only.html', title=FILE)
 
 
 @appv.route('/table')
 def table_page():
-    jsonfile = get_json_file()
-    return render_template('table.html', fields=FIELDS, arrayofdict=jsonfile)
+    tabfl = get_json_file(FILE)
+    return render_template('table.html',
+                           fields=FIELDS,
+                           arrayofdict=tabfl)
