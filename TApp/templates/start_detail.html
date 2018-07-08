@@ -12,7 +12,8 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	p { margin: 10px; }
+    font-size:16px;
+	margin: 10px;
 }
 
 .button {
@@ -27,18 +28,29 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
 }
 
     </style>
     </head>
     <body>
     <div class="info">
-        <p>Paste your .json file in TApp/upload_files. Change the FIELDS and FILE in jsonopener.py!</p>
+        <p>Paste your .json file in TApp/upload_files. Fill in the details and go!</p>
     </div>
     <form action="" method="POST">
+    {{ form.hidden_tag() }}
+    <br><br><br>
+    <div>
+        {{ form.file_.label }}<br>
+        {{ form.file_(size=32) }}
+    </div>
+    {% for field in form.fields %}
+        <div>
+            {{ field.label }}<br>
+            {{ field(size=32) }}
+        </div>
+    {% endfor %}
     <button class="button start">
-        TABULATE {{ title }}
+        {{ form.submit() }}
     </button>
     </form>
     </body>

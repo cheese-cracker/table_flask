@@ -1,19 +1,15 @@
 from TApp import appv
-from flask import render_template, request, redirect
-from TApp.jsonopener import get_json_file, FIELDS, FILE
+from flask import render_template
+from TApp.jsonopener import get_json_file
+from TApp.forms import FileDetailForm
 
 
 @appv.route('/', methods=["GET", "POST"])
 @appv.route('/index', methods=["GET", "POST"])
 def start_page():
-    if request.method == "POST":
-        return redirect('/table')
-    return render_template('start_only.html', title=FILE)
-
-
-@appv.route('/table')
-def table_page():
-    tabfl = get_json_file(FILE)
-    return render_template('table.html',
-                           fields=FIELDS,
-                           arrayofdict=tabfl)
+    form = FileDetailForm()
+    if form.validate_on_submit():
+        tabfl = get_json_file(form.file_.data)
+        return render_template('table.html', fields=form.fields.data,
+                               arrayofdict=tabfl)
+    return render_template('start_detail.html', form=form)
