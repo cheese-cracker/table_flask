@@ -1,4 +1,5 @@
 import os
+# os.environ["FLASK_APP"] = "table_flask"
 
 
 class Config:

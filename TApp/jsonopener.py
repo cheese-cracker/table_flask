@@ -15,5 +15,5 @@ def get_json_file(file_):
     return jsonfl
 
 
-# for root, dirs, files in os.walk("./TApp/upload_files"):
-#     file_list = [str(fil) for fil in files]
+for root, dirs, files in os.walk("./TApp/upload_files"):
+    file_list = [str(fil)[:-5] for fil in files]   # [:-5] to remove json
