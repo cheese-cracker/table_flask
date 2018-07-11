@@ -1,6 +1,8 @@
-<html>
-    <head>
-    <style>
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block scripts %}
+{{ super() }}
+<style>
 body {
 	background-color: #151515;
 	color: #eee;
@@ -26,32 +28,30 @@ body {
 }
 .start {
 	position: absolute;
-	top: 50%;
 	left: 50%;
 }
 
-    </style>
-    </head>
-    <body>
+</style>
+{% endblock %}
+
+{% block content %}
+<body>
     <div class="info">
         <p>Paste your .json file in TApp/upload_files. Fill in the details and go!</p>
     </div>
     <form action="" method="POST">
-    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
     <br><br><br>
     <div>
-        {{ form.file_.label }}<br>
-        {{ form.file_(size=32) }}
+        {{ wtf.form_field(form.file_) }}
     </div>
     {% for field in form.fields %}
         <div>
-            {{ field.label }}<br>
-            {{ field(size=32) }}
+            {{ wtf.form_field(field) }}
         </div>
     {% endfor %}
-    <button class="button start">
-        {{ form.submit() }}
+    <input class="button start" type="submit" value="TABULATE">
     </button>
     </form>
-    </body>
-    </html>
+</body>
+{% endblock %}

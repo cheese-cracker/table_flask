@@ -1,5 +1,5 @@
 import json
-# import os
+import os
 
 FIELDS = ['name', 'no_people', 'technology_tags', 'topic_tags']
 FILE = "example"
@@ -13,3 +13,7 @@ def get_json_file(file_):
     with open(file_name, 'r') as working_file:
         jsonfl = json.load(working_file)
     return jsonfl
+
+
+# for root, dirs, files in os.walk("./TApp/upload_files"):
+#     file_list = [str(fil) for fil in files]
