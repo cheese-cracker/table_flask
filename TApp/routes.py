@@ -1,8 +1,9 @@
 import os
+from sys import stdout
 from TApp import appv
 from flask import render_template, request, flash, redirect, url_for
-from TApp.jsonopener import get_json_file
 from TApp.forms import FileDetailForm
+from TApp.jsonopener import get_json_file
 from werkzeug.utils import secure_filename
 
 
@@ -18,9 +19,6 @@ def start_page():
     return render_template('start_detail.html', form=form)
 
 
-appv.config['UPLOAD_FOLDER'] = './upload_files'
-
-
 def check_ext(file_name):
     return '.' in file_name and file_name.rsplit('.', 1)[1].lower() == 'json'
 
@@ -28,14 +26,16 @@ def check_ext(file_name):
 @appv.route('/upload', methods=["GET", "POST"])
 def uploader():
     if request.method == "POST":
-        try:
-            file_ex = request.files['file']
-        except KeyError:
-            flash('No File Part')
-            return redirect(url_for('start_page'))
-        if file_ex and check_ext(file_ex.filename):
-            sec_filename = secure_filename(file_ex.filename)
-            file_ex.save(os.path.join(appv.config['UPLOAD_FOLDER'], sec_filename))
-            flash('Succesfully yours: ' + sec_filename)
-            return redirect(url_for('start_page'))
+        # try:
+        file_set = request.files.getlist('file[]', None)
+        # except KeyError:
+        #     flash('No File Part')
+        #     return redirect(url_for('start_page'))
+        for file_ex in file_set:
+            if file_ex and check_ext(file_ex.filename):
+                sec_filename = secure_filename(file_ex.filename)
+                file_ex.save(os.path.join(appv.config['UPLOAD_FOLDER'],
+                                          sec_filename))
+                flash('Succesfully yours: ' + sec_filename)
+        return redirect(url_for('start_page'))
     return render_template('upload_page.html')

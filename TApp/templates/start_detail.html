@@ -1,58 +1,13 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block scripts %}
-{{ super() }}
-<style>
-body {
-	background-color: #151515;
-	color: #eee;
-	font-family: 'Share Tech Mono', monospace;
-	user-select: none;
-}
 
-.info {
-	position: relative;
-	top: 0%;
-	left: 10%;
-    font-size:20px;
-	margin: 10px;
-}
-
-.other_info {
-    color: green;
-    position: relative;
-    left: 25%;
-    font-size:18px;
-    width: 50%
-}
-
-.file_info {
-position: relative;
-left: 50%;
-font-size:24px;
-margin: 10px;
-}
-
-.button {
-	background-color: #111;
-	border: solid 1px #888;
-	padding: 8px 25px;
-	font-size: 28px;
-	letter-spacing: 2px;
-	cursor: pointer;
-}
-.start {
-	position: absolute;
-	left: 50%;
-}
-
-</style>
-{% endblock %}
-
-{% block content %}
+{% block app_content %}
 <body>
     <div class="info">
-        <p>Paste your .json file in TApp/upload_files. Fill in the details and go!</p>
+        <p>Upload your json file. Fill in the details and go!</p>
+    </div>
+    <div class="mid button">
+        <a href="{{ url_for('uploader')  }}">UPLOAD FILES</a>
     </div>
     <form action="" method="POST">
     {{ form.csrf_token }}
@@ -66,8 +21,7 @@ margin: 10px;
             {{ wtf.form_field(field, class="other_info") }}
         </div>
     {% endfor %}
-    <input class="button start" type="submit" value="TABULATE">
-    </button>
+    <input class="button mid" type="submit" value="TABULATE">
     </form>
 </body>
 {% endblock %}

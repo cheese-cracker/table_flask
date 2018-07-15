@@ -1,0 +1,73 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+    {% if title %} {{ title }}  {% else %} .json Tabulator {% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<style>
+    body {
+        background-color: #151515;
+        color: #eee;
+        font-family: 'Share Tech Mono', monospace;
+        user-select: none;
+    }
+
+    .info {
+        position: relative;
+        top: 0%;
+        left: 10%;
+        font-size:20px;
+        margin: 10px;
+    }
+
+    .other_info {
+        color: green;
+        position: relative;
+        left: 25%;
+        font-size:18px;
+        width: 50%
+    }
+
+    .file_info {
+    position: relative;
+    left: 50%;
+    font-size:24px;
+    margin: 10px;
+    }
+
+    .button {
+        background-color: #111;
+        border: solid 1px #888;
+        padding: 8px 25px;
+        font-size: 28px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        width: 40%;
+        text-align: center;
+    }
+    .mid {
+        position: relative;
+        left: 30%;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# Show Flashed Messages #}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+<div class="alert alert-info" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{# USE app_content for derived templates #}
+{% block app_content %} {% endblock %}
+
+{% endblock %}
