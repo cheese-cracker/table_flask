@@ -9,7 +9,7 @@
     <div class="mid button">
         <a href="{{ url_for('uploader')  }}">UPLOAD FILES</a>
     </div>
-    <form action="{{ url_for('table', file_url=form.file_) }}" method="POST">
+    <form action="{{ url_for('table') }}" method="POST">
     {{ form.csrf_token }}
     <br><br><br>
     <div class="file_info">

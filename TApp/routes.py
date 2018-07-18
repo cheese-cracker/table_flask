@@ -1,5 +1,4 @@
 import os
-from sys import stdout
 from TApp import appv
 from flask import render_template, request, flash, redirect, url_for
 from TApp.forms import FileDetailForm
@@ -14,8 +13,8 @@ def start_page():
     return render_template('start_detail.html', form=form)
 
 
-@appv.route('/table/<file_url>', methods=["POST"])
-def table(file_url):
+@appv.route('/table', methods=["POST"])
+def table():
     form = request.form
     selected_file = str(form["file_"])
     tabfl = get_json_file(selected_file)
