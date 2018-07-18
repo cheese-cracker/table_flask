@@ -11,12 +11,17 @@ from werkzeug.utils import secure_filename
 @appv.route('/index', methods=["GET", "POST"])
 def start_page():
     form = FileDetailForm()
-    if request.method == "POST":
-        selected_file = str(form.file_.data)
-        tabfl = get_json_file(selected_file)
-        return render_template('table.html', fields=form.fields.data,
-                               arrayofdict=tabfl, title=selected_file)
     return render_template('start_detail.html', form=form)
+
+
+@appv.route('/table/<file_url>', methods=["POST"])
+def table(file_url):
+    form = request.form
+    selected_file = str(form["file_"])
+    tabfl = get_json_file(selected_file)
+    return render_template('table.html',
+                           fields=[form[x] for x in form.keys() if "field" in x],
+                           arrayofdict=tabfl, title=selected_file)
 
 
 def check_ext(file_name):

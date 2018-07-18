@@ -9,16 +9,17 @@
     <div class="mid button">
         <a href="{{ url_for('uploader')  }}">UPLOAD FILES</a>
     </div>
-    <form action="" method="POST">
+    <form action="{{ url_for('table', file_url=form.file_) }}" method="POST">
     {{ form.csrf_token }}
     <br><br><br>
     <div class="file_info">
         Select File:
-        {{ wtf.form_field(form.file_, class="file_info") }}
+        {{ wtf.form_field(form.file_, name="file_", class="file_info") }}
     </div>
     {% for field in form.fields %}
         <div class="other_info">
             {{ wtf.form_field(field, class="other_info") }}
+            {# name provided by each field is fields0 fields1... #}
         </div>
     {% endfor %}
     <input class="button mid" type="submit" value="TABULATE">
